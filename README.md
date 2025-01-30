@@ -956,7 +956,7 @@ Micro is a modern, easy-to-use terminal-based editor with intuitive shortcuts.
 
 
 
-# README: Linux Partitioning, Filesystem, and Swap Management
+# Linux Partitioning, Filesystem, and Swap Management
 
 ## 1. Checking and Listing Devices
 
