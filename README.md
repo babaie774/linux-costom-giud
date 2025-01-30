@@ -954,244 +954,260 @@ Micro is a modern, easy-to-use terminal-based editor with intuitive shortcuts.
 | **Sublime Text** | Lightweight and fast code editing |
 | **Micro** | A modern alternative to Nano |
 
-This guide provides a quick reference to **working with text editors** in Linux. 🚀
 
-Here is a comprehensive README file that includes everything from your notes and additional necessary details for partitioning, filesystem management, and swap setup in Linux.
 
-README: Linux Partitioning, Filesystem, and Swap Management
+# README: Linux Partitioning, Filesystem, and Swap Management
 
-1. Checking and Listing Devices
+## 1. Checking and Listing Devices
 
 Before modifying partitions, it’s important to identify available storage devices.
 
-View System Devices
+### View System Devices
 
+```sh
 lsblk                # Lists all block devices
 fdisk -l            # Displays partition table
 cat /proc/partitions  # Lists partition details
 cat /proc/devices   # Lists character and block devices
+```
 
-Device Naming
-	•	b → Block device (e.g., /dev/sda, /dev/sdb)
-	•	c → Character device (e.g., /dev/tty, /dev/random)
-	•	/dev/zero → Provides an infinite stream of zero bytes.
+### Device Naming
 
-List Specific Devices
+- **b** → Block device (e.g., `/dev/sda`, `/dev/sdb`)
+- **c** → Character device (e.g., `/dev/tty`, `/dev/random`)
+- `/dev/zero` → Provides an infinite stream of zero bytes.
 
+### List Specific Devices
+
+```sh
 ls /dev/s??
 ls /dev/sd[r]?
+```
 
-2. Understanding Booting, Firmware, and Partition Tables
+---
 
-Firmware and Bootloaders
-	•	BIOS (Basic Input/Output System): IBM → MBR → Bootloader (GRUB) → Kernel boot.
-	•	EFI (Extensible Firmware Interface): Intel firmware interface.
-	•	UEFI (Unified Extensible Firmware Interface):
-	•	Requires an ESP (EFI System Partition) formatted with FAT.
-	•	Uses GPT (GUID Partition Table) for modern booting.
+## 2. Understanding Booting, Firmware, and Partition Tables
 
-Partition Table Types
-	•	MBR (Master Boot Record):
-	•	Limited to 4 primary partitions or 3 primary + 1 extended.
-	•	Supports disks up to 2TB.
-	•	GPT (GUID Partition Table):
-	•	Supports up to 128 partitions.
-	•	Works with UEFI booting.
-	•	Required for disks larger than 2TB.
+### Firmware and Bootloaders
 
-3. Working with Partitions
+- **BIOS (Basic Input/Output System)**: IBM → MBR → Bootloader (GRUB) → Kernel boot.
+- **EFI (Extensible Firmware Interface)**: Intel firmware interface.
+- **UEFI (Unified Extensible Firmware Interface)**:
+  - Requires an **ESP (EFI System Partition)** formatted with FAT.
+  - Uses **GPT (GUID Partition Table)** for modern booting.
 
-Viewing and Managing Partitions
+### Partition Table Types
 
+- **MBR (Master Boot Record)**:
+  - Limited to **4 primary partitions** or **3 primary + 1 extended**.
+  - Supports disks up to **2TB**.
+- **GPT (GUID Partition Table)**:
+  - Supports up to **128 partitions**.
+  - Works with UEFI booting.
+  - Required for disks larger than **2TB**.
+
+---
+
+## 3. Working with Partitions
+
+### Viewing and Managing Partitions
+
+```sh
 fdisk -l /dev/sdX    # View partition table of a specific disk
 gdisk /dev/sdX       # Manage partitions using GPT
 parted /dev/sdX      # Use GNU parted (supports GPT & MBR)
+```
 
-Creating a New Partition Using fdisk
+### Creating a New Partition Using `fdisk`
 
+```sh
 sudo fdisk /dev/sdX
+```
 
-	•	Press n → Create new partition.
-	•	Choose p for primary or e for extended.
-	•	Enter partition number.
-	•	Define sector size (press Enter for defaults).
-	•	Press w to write changes.
+- Press **`n`** → Create new partition.
+- Choose **`p`** for primary or **`e`** for extended.
+- Enter **partition number**.
+- Define **sector size** (press **Enter** for defaults).
+- Press **`w`** to write changes.
 
-Resizing Partitions
-	•	If creating a new partition, select yes.
-	•	If resizing an existing partition, ensure you unmount it before resizing.
+### Resizing Partitions
 
-Deleting a Partition
+- If **creating a new partition**, select **yes**.
+- If **resizing an existing partition**, ensure you unmount it before resizing.
 
+### Deleting a Partition
+
+```sh
 sudo fdisk /dev/sdX
+```
 
-	•	Press d and choose the partition to delete.
-	•	Press w to write changes.
+- Press **`d`** and choose the partition to delete.
+- Press **`w`** to write changes.
 
-4. Formatting a Partition (Creating a Filesystem)
+---
+
+## 4. Formatting a Partition (Creating a Filesystem)
 
 After creating a partition, format it with a filesystem.
 
-Common Filesystem Options
+### Common Filesystem Options
 
+```sh
 mkfs -t ext4 /dev/sdX1     # Format as ext4
 mkfs -t xfs /dev/sdX1      # Format as XFS
 mkfs -t ntfs /dev/sdX1     # Format as NTFS
 mkfs.vfat -F32 /dev/sdX1   # Format as FAT32
-mkfs.fap /dev/sdX1         # (If a specialized format is needed)
+```
 
-5. Mounting a Partition
+---
 
-To use a newly created partition, mount it.
+## 5. Mounting a Partition
 
-Temporary Mounting
+### Temporary Mounting
 
+```sh
 sudo mkdir /mnt/mydata
 sudo mount /dev/sdX1 /mnt/mydata
+```
 
-Persistent Mounting (Auto-Mount on Boot)
+### Persistent Mounting (Auto-Mount on Boot)
 
-Add the following entry to /etc/fstab:
+Add the following entry to `/etc/fstab`:
 
+```
 /dev/sdX1  /mnt/mydata  ext4  defaults  0  2
+```
 
 To apply changes:
 
+```sh
 sudo mount -a
+```
 
-Unmounting a Partition
+### Unmounting a Partition
 
+```sh
 sudo umount /mnt/mydata
+```
 
-Checking Mounts
+### Checking Mounts
 
+```sh
 lsblk                 # Show mounted block devices
 df -h                 # Show disk usage
 tail -n1 /proc/mounts # Display last mounted partition
+```
 
-6. Swap Space Management
+---
 
-Swap space is used as virtual memory when RAM is full.
+## 6. Swap Space Management
 
-Checking Existing Swap
+### Checking Existing Swap
 
+```sh
 swapon --show   # Display active swap spaces
 free -h         # Show memory usage
+```
 
-Creating Swap Space
+### Creating Swap Space
 
-Method 1: Partition-Based Swap
-	1.	Create a new partition using fdisk and set its type to Linux Swap (82).
-	2.	Format as swap:
+#### Method 1: Partition-Based Swap
 
+```sh
 sudo mkswap /dev/sdX2
-
-
-	3.	Enable swap:
-
 sudo swapon /dev/sdX2
+```
 
+Add to `/etc/fstab` for persistence:
 
-	4.	To make it permanent, add to /etc/fstab:
-
+```
 /dev/sdX2 none swap sw 0 0
+```
 
+#### Method 2: File-Based Swap
 
-
-Method 2: File-Based Swap
-	1.	Create a swap file:
-
+```sh
 sudo fallocate -l 2G /swapfile
-
-(Or use dd if fallocate is unavailable):
-
-sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
-
-
-	2.	Secure the swap file:
-
 sudo chmod 600 /swapfile
-
-
-	3.	Format it as swap:
-
 sudo mkswap /swapfile
-
-
-	4.	Enable swap:
-
 sudo swapon /swapfile
+```
 
+Add to `/etc/fstab`:
 
-	5.	Make it permanent:
-
+```
 /swapfile none swap sw 0 0
+```
 
+### Disabling and Removing Swap
 
-
-Disabling and Removing Swap
-	•	Temporarily disable swap:
-
+```sh
 sudo swapoff -a
-
-
-	•	Remove a swap file:
-
 sudo rm /swapfile
+```
 
+---
 
-	•	Remove a swap partition:
-	•	Delete the partition using fdisk and remove its entry in /etc/fstab.
+## 7. Filesystem Maintenance and Optimization
 
-7. Filesystem Maintenance and Optimization
+### Check Disk Usage
 
-Check Disk Usage
-
-df -h            # Show disk space usage
+```sh
+df -h            # Check disk space usage
 lsblk            # List block devices
+```
 
-Check and Repair Filesystems
+### Check and Repair Filesystems
 
+```sh
 fsck /dev/sdX1   # Check and repair the filesystem
+```
 
-Manage Filesystem Attributes
+### Manage Filesystem Attributes
 
+```sh
 tune2fs -U random /dev/sdX1  # Generate a new UUID
 tune2fs -l /dev/sdX1         # Show filesystem details
+```
 
-Free Memory & Cache
+### Free Memory & Cache
 
+```sh
 free -h             # Check free memory
 sync && echo 3 > /proc/sys/vm/drop_caches  # Clear cache
+```
 
-8. Advanced Partitioning & RAID
+---
 
-Creating a RAID Array
+## 8. Advanced Partitioning & RAID
 
+### Creating a RAID Array
+
+```sh
 mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdX /dev/sdY
+```
 
-	•	RAID 0: Striped (no redundancy).
-	•	RAID 1: Mirrored.
-	•	RAID 5: Striping with parity.
-	•	RAID 6: Double parity.
-	•	RAID 10: Striping + Mirroring.
+### LVM (Logical Volume Manager)
 
-LVM (Logical Volume Manager)
-
+```sh
 pvcreate /dev/sdX1
 vgcreate my_vg /dev/sdX1
 lvcreate -L 10G -n my_lv my_vg
 mkfs.ext4 /dev/my_vg/my_lv
 mount /dev/my_vg/my_lv /mnt/mydir
+```
 
-Conclusion
+---
+
+## Conclusion
 
 This guide covers:
-✔ Checking devices and partitions
-✔ Creating, formatting, and mounting partitions
-✔ Setting up and managing swap space
-✔ Filesystem maintenance
-✔ Advanced partitioning with RAID and LVM
 
-This ensures efficient disk management and performance optimization in Linux.
+- Checking devices and partitions
+- Creating, formatting, and mounting partitions
+- Setting up and managing swap space
+- Filesystem maintenance
+- Advanced partitioning with RAID and LVM
+
+This ensures **efficient disk management** and **performance optimization** in Linux.
 
