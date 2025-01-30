@@ -491,6 +491,16 @@ This document provides a comprehensive overview of **special characters** in Lin
   printenv   # Print all environment variables
   set   # Show all shell variables (including environment variables)
   export   # Show exported environment variables
+
+  export VAR_NAME=value   # Set an environment variable for the current session
+  echo $VAR_NAME   # Check if a variable exists
+  unset VAR_NAME   # Remove an environment variable
+  
+  echo $PATH   # Show current PATH
+  export PATH=$PATH:/new/directory   # Append a directory to PATH
+
+
+  echo 'export VAR_NAME=value' >> ~/.bashrc   # Add to ~/.bashrc for persistence source ~/.bashrc   # Apply changes
   ```
   
 ### **2.3 Shell Variables**
@@ -584,18 +594,7 @@ This document provides a comprehensive overview of **special characters** in Lin
 | `$!` | Process ID of last background command |
 | `$_` | Last argument of last command |
 
----
-
-This guide serves as a reference for **special characters**, **variables**, and **shell scripting essentials** in Linux. 🚀
-
-
-# **Linux Special Characters and Variables Guide**
-
-This document provides a comprehensive overview of **special characters** in Linux, along with **variable types**, their definitions, and modifications.
-
----
-
-## **1. Special Characters in Linux**
+## **5. Special Characters in Linux**
 
 | Character | Description | Example |
 |-----------|-------------|---------|
@@ -622,75 +621,6 @@ This document provides a comprehensive overview of **special characters** in Lin
 | `\` | Escape special characters | `echo "\$HOME"` |
 | `:` | No operation (used in scripts) | `: do nothing` |
 | `!` | Negate a command or history expansion | `!ls` |
-
----
-
-## **2. Variable Types in Linux**
-
-### **2.1 Local Variables**
-- Defined within a script/session and not inherited by child processes.
-- Example:
-  ```bash
-  myvar="Hello"
-  echo $myvar
-  ```
-
-### **2.2 Environment Variables**
-- Available system-wide and inherited by child processes.
-- Example:
-  ```bash
-  export MY_ENV="Global Variable"
-  ```
-  
-### **2.3 Shell Variables**
-- Special variables set by the shell, affecting its behavior.
-- Example:
-  ```bash
-  echo $SHELL   # Shows current shell
-  echo $PATH    # Shows executable search paths
-  ```
-
----
-
-## **3. Defining and Modifying Variables**
-
-| Operation | Command | Example |
-|-----------|----------|---------|
-| Define a variable | `VAR=value` | `myvar="Hello"` |
-| Access variable | `$VAR` | `echo $myvar` |
-| Export variable | `export VAR=value` | `export PATH=$PATH:/opt/bin` |
-| Remove variable | `unset VAR` | `unset myvar` |
-| Append to variable | `VAR+="value"` | `PATH+=":/opt/bin"` |
-| Read user input | `read VAR` | `read username` |
-| Assign output of command | `VAR=$(command)` | `NOW=$(date)` |
-| Check if variable is set | `${VAR:-default}` | `echo ${HOME:-"/home/default"}` |
-| Check if variable is empty | `${VAR:+value}` | `echo ${HOME:+"Set"}` |
-
----
-
-## **4. Special Shell Variables**
-
-| Variable | Description |
-|----------|-------------|
-| `$0` | Name of the script |
-| `$1, $2, ...` | Positional parameters |
-| `$@` | All parameters as separate words |
-| `$*` | All parameters as a single string |
-| `$#` | Number of arguments passed to script |
-| `$?` | Exit status of last command |
-| `$$` | Process ID of the current script |
-| `$!` | Process ID of last background command |
-| `$_` | Last argument of last command |
-
----
-
-This guide serves as a reference for **special characters**, **variables**, and **shell scripting essentials** in Linux. 🚀
-
-
-
-# **Linux File Globing and Regular Expressions Guide**
-
-This document provides an overview of **file globbing** and **regular expressions (Regex)** in Linux, including syntax, examples, and common use cases.
 
 ---
 
