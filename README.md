@@ -496,6 +496,57 @@ This document provides a comprehensive overview of **special characters** in Lin
   ```bash
   echo $SHELL   # Shows current shell
   echo $PATH    # Shows executable search paths
+  echo $SHELL   # Shows current shell
+  getent passwd $USER | cut -d: -f7   # Alternative way to get the shell
+  chsh -l   # List available shells
+  
+  echo $HOME   # Shows the user's home directory
+  eval echo ~$USER   # Alternative way to get the home directory
+  getent passwd $USER | cut -d: -f6   # Another way to retrieve home directory
+  
+  echo $USER   # Shows the current logged-in user
+  whoami   # Alternative way to get the user
+  id -un   # Another way to retrieve the username
+  
+  echo $PWD   # Shows the current working directory
+  pwd   # Alternative way to get the current directory
+  
+  echo $PATH   # Shows executable search paths
+  printenv PATH   # Alternative way to get the PATH
+  env | grep PATH   # Another way to display the PATH
+  
+  echo $EDITOR   # Shows the default text editor
+  update-alternatives --display editor   # List available editors
+  
+  echo $LANG   # Shows the system language
+  locale   # Display locale settings
+  
+  echo $HOSTNAME   # Shows the system hostname
+  hostname   # Alternative way to get the hostname
+  uname -n   # Another way to retrieve the hostname
+  
+  echo $UID   # Shows the user ID
+  id -u   # Alternative way to get the user ID
+  
+  echo $GID   # Shows the group ID
+  id -g   # Alternative way to get the group ID
+  
+  echo $LOGNAME   # Shows the logged-in username
+  logname   # Alternative way to get the username
+  
+  echo $TERM   # Shows the current terminal type
+  tput longname   # Alternative way to describe the terminal
+  
+  echo $DISPLAY   # Shows the X display server used (for GUI sessions)
+  xdpyinfo | grep display   # Alternative way to check display
+  
+  echo $XDG_SESSION_TYPE   # Shows if session is GUI or terminal
+  loginctl show-session $(loginctl | grep $USER | awk '{print $1}') -p Type   # Alternative way to check session type
+  
+  echo $XDG_CURRENT_DESKTOP   # Shows the current desktop environment
+  echo $DESKTOP_SESSION   # Alternative way to check desktop session
+  
+  echo $SHLVL   # Shows the shell nesting level
   ```
 
 ---
