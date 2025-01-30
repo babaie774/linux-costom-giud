@@ -821,5 +821,140 @@ sed -E 's/[0-9]+/NUM/' file.txt  # Replace numbers with 'NUM'
 
 This guide provides essential knowledge of **file globbing** and **regular expressions** in Linux. 🚀
 
+# **Guide to Working with Different Text Editors in Linux**
+
+This document provides an overview of popular text editors in Linux, their basic usage, and essential commands.
+
+---
+
+## **1. Nano (Beginner-Friendly Editor)**
+Nano is a simple and easy-to-use text editor available by default in most Linux distributions.
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `nano filename` | Open or create a file in Nano |
+| `CTRL + X` | Exit Nano |
+| `CTRL + O` | Save changes |
+| `CTRL + R` | Open a file |
+| `CTRL + K` | Cut a line |
+| `CTRL + U` | Paste a line |
+| `CTRL + W` | Search within a file |
+| `CTRL + \\` | Find and replace |
+
+---
+
+## **2. Vim (Powerful and Efficient Editor)**
+Vim is a highly configurable text editor used for efficient text editing.
+
+### **Modes in Vim**
+- **Normal Mode**: Used for navigation and commands (default mode).
+- **Insert Mode**: Used for text input (`i` to enter Insert mode).
+- **Command Mode**: Used for file operations (`:` followed by a command).
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `vim filename` | Open or create a file in Vim |
+| `i` | Enter Insert mode |
+| `ESC` | Exit Insert mode |
+| `:w` | Save file |
+| `:q` | Quit Vim |
+| `:wq` or `ZZ` | Save and exit |
+| `:q!` | Exit without saving |
+| `/search` | Search for text |
+| `n` / `N` | Move to next/previous search result |
+| `dd` | Delete a line |
+| `yy` | Copy a line |
+| `p` | Paste content |
+| `u` | Undo last change |
+
+---
+
+## **3. Emacs (Extensible and Customizable Editor)**
+Emacs is a powerful, extensible editor with a large set of features.
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `emacs filename` | Open or create a file in Emacs |
+| `CTRL + X CTRL + S` | Save file |
+| `CTRL + X CTRL + C` | Exit Emacs |
+| `CTRL + X CTRL + F` | Open a file |
+| `CTRL + K` | Cut line |
+| `CTRL + Y` | Paste line |
+| `CTRL + SPACE` | Start selection |
+| `ALT + W` | Copy selection |
+| `CTRL + W` | Cut selection |
+| `CTRL + /` | Undo |
+| `CTRL + S` | Search forward |
+| `CTRL + R` | Search backward |
+
+---
+
+## **4. VS Code (Graphical Editor with Extensions)**
+Visual Studio Code is a modern, feature-rich editor with support for extensions.
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `code filename` | Open a file in VS Code |
+| `CTRL + S` | Save file |
+| `CTRL + X` | Cut |
+| `CTRL + C` | Copy |
+| `CTRL + V` | Paste |
+| `CTRL + P` | Quick file open |
+| `CTRL + SHIFT + P` | Command palette |
+| `CTRL + /` | Toggle comment |
+| `CTRL + F` | Find text |
+| `CTRL + H` | Replace text |
+
+---
+
+## **5. Sublime Text (Lightweight and Fast Editor)**
+Sublime Text is a lightweight and responsive editor with rich features.
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `subl filename` | Open a file in Sublime Text |
+| `CTRL + S` | Save file |
+| `CTRL + P` | Open file quickly |
+| `CTRL + SHIFT + P` | Command palette |
+| `CTRL + D` | Select word |
+| `CTRL + F` | Find text |
+| `CTRL + H` | Replace text |
+| `CTRL + L` | Select line |
+
+---
+
+## **6. Micro (Modern Terminal-Based Editor)**
+Micro is a modern, easy-to-use terminal-based editor with intuitive shortcuts.
+
+### **Basic Commands**
+| Command | Description |
+|---------|-------------|
+| `micro filename` | Open or create a file in Micro |
+| `CTRL + S` | Save file |
+| `CTRL + Q` | Quit editor |
+| `CTRL + C` | Copy text |
+| `CTRL + X` | Cut text |
+| `CTRL + V` | Paste text |
+| `CTRL + F` | Search text |
+
+---
+
+## **Choosing the Right Editor**
+| Editor | Best For |
+|--------|----------|
+| **Nano** | Beginners who need a simple editor |
+| **Vim** | Advanced users who prefer keyboard efficiency |
+| **Emacs** | Users who need a fully extensible environment |
+| **VS Code** | Developers who want a GUI-based editor with extensions |
+| **Sublime Text** | Lightweight and fast code editing |
+| **Micro** | A modern alternative to Nano |
+
+This guide provides a quick reference to **working with text editors** in Linux. 🚀
+
 
 
