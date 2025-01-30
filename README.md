@@ -226,3 +226,97 @@ Stores variable data like logs, mail, and databases.
 ---
 
 This guide **covers every possible directory** in Linux, giving you complete mastery over the Linux filesystem! 🚀🔥
+
+
+
+# **Linux Command Guide**
+
+This document provides a comprehensive list of essential Linux commands categorized based on functionality.
+
+---
+
+## **1. Kernel Commands**
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `uname -r` | Display the kernel version | `uname -r` |
+| `uname -a` | Show all system information | `uname -a` |
+| `dmesg` | Display kernel messages | `dmesg | less` |
+| `sysctl -a` | Show all kernel parameters | `sysctl -a` |
+| `sysctl -w` | Modify kernel parameters at runtime | `sysctl -w net.ipv4.ip_forward=1` |
+| `modprobe` | Load a kernel module | `modprobe module_name` |
+| `rmmod` | Remove a kernel module | `rmmod module_name` |
+| `lsmod` | List currently loaded kernel modules | `lsmod` |
+| `cat /proc/version` | Show kernel version and build details | `cat /proc/version` |
+
+---
+
+## **2. Hardware Commands**
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `lshw` | Display detailed hardware info | `sudo lshw -short` |
+| `lscpu` | Show CPU details | `lscpu` |
+| `lsblk` | List information about block devices | `lsblk` |
+| `df -h` | Show disk space usage | `df -h` |
+| `free -h` | Display memory usage | `free -h` |
+| `lsusb` | List USB devices | `lsusb` |
+| `lspci` | List PCI devices | `lspci` |
+| `dmidecode` | Show system hardware information | `sudo dmidecode` |
+| `hdparm -I /dev/sda` | Display hard drive information | `sudo hdparm -I /dev/sda` |
+| `uptime` | Show system uptime | `uptime` |
+
+---
+
+## **3. Operating System Commands**
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `hostnamectl` | Display system hostname info | `hostnamectl` |
+| `uptime` | Show system uptime | `uptime` |
+| `lsb_release -a` | Get Linux distribution details | `lsb_release -a` |
+| `cat /etc/os-release` | Display OS version | `cat /etc/os-release` |
+| `whoami` | Show current user | `whoami` |
+| `env` | Display environment variables | `env` |
+| `date` | Show system date and time | `date` |
+| `cal` | Display a calendar | `cal` |
+
+---
+
+## **4. Networking Commands**
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `ip a` | Show IP addresses | `ip a` |
+| `ifconfig` | Display network interfaces (deprecated) | `ifconfig` |
+| `ip route` | Show routing table | `ip route` |
+| `ping` | Test network connectivity | `ping google.com` |
+| `netstat -tulnp` | List open ports and services | `netstat -tulnp` |
+| `ss -tulnp` | Show listening sockets | `ss -tulnp` |
+| `nslookup` | Query DNS records | `nslookup google.com` |
+| `dig` | Perform DNS lookups | `dig google.com` |
+| `traceroute` | Trace route to a host | `traceroute google.com` |
+
+---
+
+## **5. Process and Service Management**
+
+| Command | Description | Example |
+|---------|-------------|---------|
+| `ps aux` | Show running processes | `ps aux` |
+| `top` | Display real-time processes | `top` |
+| `htop` | Enhanced process viewer | `htop` |
+| `systemctl status` | Show service status | `systemctl status apache2` |
+| `systemctl start` | Start a service | `systemctl start apache2` |
+| `systemctl stop` | Stop a service | `systemctl stop apache2` |
+| `systemctl restart` | Restart a service | `systemctl restart apache2` |
+| `systemctl enable` | Enable service at boot | `systemctl enable apache2` |
+| `systemctl disable` | Disable service at boot | `systemctl disable apache2` |
+| `kill -9 PID` | Terminate a process | `kill -9 1234` |
+| `nice -n 10 command` | Run command with priority | `nice -n 10 make` |
+
+---
+
+This guide serves as a reference for essential Linux commands, categorized for ease of use. 🚀
+
+
