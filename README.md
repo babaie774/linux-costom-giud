@@ -315,6 +315,106 @@ This document provides a comprehensive list of essential Linux commands categori
 | `kill -9 PID` | Terminate a process | `kill -9 1234` |
 | `nice -n 10 command` | Run command with priority | `nice -n 10 make` |
 
+# **Linux File Globing and Regular Expressions Guide**
+
+This document provides an overview of **file globbing** and **regular expressions (Regex)** in Linux, including syntax, examples, and common use cases.
+
+---
+
+## **1. File Globbing in Linux**
+File globbing is used for **pattern matching in filenames and paths** within shell commands. It utilizes special wildcard characters to match files.
+
+### **Common Glob Patterns**
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| `*` | Matches any number of characters (including none) | `ls *.txt` (lists all `.txt` files) |
+| `?` | Matches a single character | `ls file?.txt` (matches `file1.txt`, `file2.txt`, etc.) |
+| `[abc]` | Matches **any one** of the specified characters | `ls file[123].txt` (matches `file1.txt`, `file2.txt`, `file3.txt`) |
+| `[a-z]` | Matches any single character in the specified range | `ls file[a-d].txt` (matches `filea.txt` to `filed.txt`) |
+| `[!abc]` | Matches any character **except** the specified ones | `ls file[!123].txt` (excludes `file1.txt`, `file2.txt`, `file3.txt`) |
+| `{a,b,c}` | Matches any **comma-separated values** within `{}` | `ls file{1,2,3}.txt` (matches `file1.txt`, `file2.txt`, `file3.txt`) |
+| `**` | Matches directories recursively (Bash 4.0+) | `ls **/*.txt` (finds `.txt` files in all subdirectories) |
+
+### **Globbing Examples**
+```sh
+ls *.sh          # List all shell scripts
+rm file?.txt     # Remove files like file1.txt, file2.txt
+mv doc[1-3].pdf backup/  # Move doc1.pdf, doc2.pdf, doc3.pdf to backup/
+```
+
+---
+
+## **2. Regular Expressions (Regex) in Linux**
+Regular expressions provide powerful **pattern matching capabilities** beyond file globbing and are commonly used in tools like `grep`, `sed`, `awk`, and `find`.
+
+### **Basic Regular Expression Syntax**
+| Pattern | Description | Example |
+|---------|-------------|---------|
+| `.` | Matches **any single character** except a newline | `grep "b.g" file.txt` (matches `bag`, `bog`, `big`) |
+| `^` | Matches the **beginning** of a line | `grep "^Hello" file.txt` (matches lines starting with `Hello`) |
+| `$` | Matches the **end** of a line | `grep "world$" file.txt` (matches lines ending with `world`) |
+| `*` | Matches **zero or more** occurrences of the preceding character | `grep "ab*" file.txt` (matches `a`, `ab`, `abb`, `abbb`, etc.) |
+| `+` | Matches **one or more** occurrences of the preceding character | `grep "ab+" file.txt` (matches `ab`, `abb`, `abbb`, but not `a`) |
+| `?` | Matches **zero or one** occurrences of the preceding character | `grep "colou?r" file.txt` (matches `color` and `colour`) |
+| `{n}` | Matches **exactly n** occurrences of the preceding character | `grep "a{3}" file.txt` (matches `aaa`) |
+| `{n,}` | Matches **at least n** occurrences | `grep "a{2,}" file.txt` (matches `aa`, `aaa`, `aaaa`, etc.) |
+| `{n,m}` | Matches **between n and m** occurrences | `grep "a{2,4}" file.txt` (matches `aa`, `aaa`, `aaaa`) |
+| `[abc]` | Matches **any one** of the specified characters | `grep "[aeiou]" file.txt` (matches vowels) |
+| `[^abc]` | Matches **any character except** the ones inside `[]` | `grep "[^0-9]" file.txt` (matches non-digit characters) |
+| `(abc)` | Groups a subpattern | `grep "(hello|world)" file.txt` (matches `hello` or `world`) |
+| `\` | Escape special characters | `grep "\.txt" file.txt` (matches `.txt`) |
+
+### **Extended Regular Expressions (ERE) with `grep -E`**
+```sh
+grep -E "colou?r" file.txt   # Matches 'color' or 'colour'
+grep -E "[0-9]{2,4}" file.txt  # Matches numbers with 2 to 4 digits
+grep -E "^Start.*end$" file.txt  # Matches lines starting with 'Start' and ending with 'end'
+```
+
+### **Regex with `sed` for Text Manipulation**
+```sh
+sed -E 's/[0-9]+/NUMBER/g' file.txt   # Replace all numbers with 'NUMBER'
+sed -E 's/(hello|hi)/HEY/g' file.txt  # Replace 'hello' or 'hi' with 'HEY'
+```
+
+### **Regex with `awk` for Text Processing**
+```sh
+awk '/error/ {print $0}' log.txt    # Print lines containing 'error'
+awk '/^[0-9]+/ {print $1}' data.txt  # Print first column if it starts with a number
+```
+
+---
+
+## **3. Differences Between Globbing and Regex**
+| Feature | Globbing | Regular Expressions |
+|---------|---------|------------------|
+| Used for | Matching file names | Matching patterns in text |
+| Wildcards | `*`, `?`, `[]`, `{}` | `^`, `$`, `.` , `+`, `?`, `{}` |
+| Tools | Shell (`ls`, `rm`, `cp`) | `grep`, `sed`, `awk`, `find` |
+| Complexity | Simple | Advanced & powerful |
+
+---
+
+## **4. Practical Use Cases**
+### **Find and Delete Files with Globbing**
+```sh
+rm *.log            # Delete all log files
+find /var/log -name "*.log" -delete  # Find and delete all log files recursively
+```
+
+### **Find Files Using Regex in `grep`**
+```sh
+grep -E "error|fail" logs.txt  # Find lines containing 'error' or 'fail'
+```
+
+### **Replace Text Using `sed`**
+```sh
+sed -E 's/[0-9]+/NUM/' file.txt  # Replace numbers with 'NUM'
+```
+
+---
+
+
 ---
 
 This guide serves as a reference for essential Linux commands, categorized for ease of use. 🚀
