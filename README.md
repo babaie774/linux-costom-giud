@@ -315,110 +315,127 @@ This document provides a comprehensive list of essential Linux commands categori
 | `kill -9 PID` | Terminate a process | `kill -9 1234` |
 | `nice -n 10 command` | Run command with priority | `nice -n 10 make` |
 
-# **Linux File Globing and Regular Expressions Guide**
+# **Comprehensive Guide to File and Directory Commands in Linux**
 
-This document provides an overview of **file globbing** and **regular expressions (Regex)** in Linux, including syntax, examples, and common use cases.
+This document provides a detailed list of commands for working with files and directories in Linux, along with their options.
 
 ---
 
-## **1. File Globbing in Linux**
-File globbing is used for **pattern matching in filenames and paths** within shell commands. It utilizes special wildcard characters to match files.
-
-### **Common Glob Patterns**
-| Pattern | Description | Example |
+## **1. Listing Files and Directories**
+| Command | Description | Example |
 |---------|-------------|---------|
-| `*` | Matches any number of characters (including none) | `ls *.txt` (lists all `.txt` files) |
-| `?` | Matches a single character | `ls file?.txt` (matches `file1.txt`, `file2.txt`, etc.) |
-| `[abc]` | Matches **any one** of the specified characters | `ls file[123].txt` (matches `file1.txt`, `file2.txt`, `file3.txt`) |
-| `[a-z]` | Matches any single character in the specified range | `ls file[a-d].txt` (matches `filea.txt` to `filed.txt`) |
-| `[!abc]` | Matches any character **except** the specified ones | `ls file[!123].txt` (excludes `file1.txt`, `file2.txt`, `file3.txt`) |
-| `{a,b,c}` | Matches any **comma-separated values** within `{}` | `ls file{1,2,3}.txt` (matches `file1.txt`, `file2.txt`, `file3.txt`) |
-| `**` | Matches directories recursively (Bash 4.0+) | `ls **/*.txt` (finds `.txt` files in all subdirectories) |
-
-### **Globbing Examples**
-```sh
-ls *.sh          # List all shell scripts
-rm file?.txt     # Remove files like file1.txt, file2.txt
-mv doc[1-3].pdf backup/  # Move doc1.pdf, doc2.pdf, doc3.pdf to backup/
-```
+| `ls` | List files in a directory | `ls` |
+| `ls -l` | Long format listing with details | `ls -l` |
+| `ls -a` | Show hidden files | `ls -a` |
+| `ls -lh` | Show file sizes in human-readable format | `ls -lh` |
+| `ls -R` | List directories recursively | `ls -R` |
+| `ls -t` | Sort files by modification time | `ls -lt` |
 
 ---
 
-## **2. Regular Expressions (Regex) in Linux**
-Regular expressions provide powerful **pattern matching capabilities** beyond file globbing and are commonly used in tools like `grep`, `sed`, `awk`, and `find`.
-
-### **Basic Regular Expression Syntax**
-| Pattern | Description | Example |
+## **2. Creating Files and Directories**
+| Command | Description | Example |
 |---------|-------------|---------|
-| `.` | Matches **any single character** except a newline | `grep "b.g" file.txt` (matches `bag`, `bog`, `big`) |
-| `^` | Matches the **beginning** of a line | `grep "^Hello" file.txt` (matches lines starting with `Hello`) |
-| `$` | Matches the **end** of a line | `grep "world$" file.txt` (matches lines ending with `world`) |
-| `*` | Matches **zero or more** occurrences of the preceding character | `grep "ab*" file.txt` (matches `a`, `ab`, `abb`, `abbb`, etc.) |
-| `+` | Matches **one or more** occurrences of the preceding character | `grep "ab+" file.txt` (matches `ab`, `abb`, `abbb`, but not `a`) |
-| `?` | Matches **zero or one** occurrences of the preceding character | `grep "colou?r" file.txt` (matches `color` and `colour`) |
-| `{n}` | Matches **exactly n** occurrences of the preceding character | `grep "a{3}" file.txt` (matches `aaa`) |
-| `{n,}` | Matches **at least n** occurrences | `grep "a{2,}" file.txt` (matches `aa`, `aaa`, `aaaa`, etc.) |
-| `{n,m}` | Matches **between n and m** occurrences | `grep "a{2,4}" file.txt` (matches `aa`, `aaa`, `aaaa`) |
-| `[abc]` | Matches **any one** of the specified characters | `grep "[aeiou]" file.txt` (matches vowels) |
-| `[^abc]` | Matches **any character except** the ones inside `[]` | `grep "[^0-9]" file.txt` (matches non-digit characters) |
-| `(abc)` | Groups a subpattern | `grep "(hello|world)" file.txt` (matches `hello` or `world`) |
-| `\` | Escape special characters | `grep "\.txt" file.txt` (matches `.txt`) |
-
-### **Extended Regular Expressions (ERE) with `grep -E`**
-```sh
-grep -E "colou?r" file.txt   # Matches 'color' or 'colour'
-grep -E "[0-9]{2,4}" file.txt  # Matches numbers with 2 to 4 digits
-grep -E "^Start.*end$" file.txt  # Matches lines starting with 'Start' and ending with 'end'
-```
-
-### **Regex with `sed` for Text Manipulation**
-```sh
-sed -E 's/[0-9]+/NUMBER/g' file.txt   # Replace all numbers with 'NUMBER'
-sed -E 's/(hello|hi)/HEY/g' file.txt  # Replace 'hello' or 'hi' with 'HEY'
-```
-
-### **Regex with `awk` for Text Processing**
-```sh
-awk '/error/ {print $0}' log.txt    # Print lines containing 'error'
-awk '/^[0-9]+/ {print $1}' data.txt  # Print first column if it starts with a number
-```
+| `touch filename` | Create an empty file | `touch file.txt` |
+| `mkdir dirname` | Create a new directory | `mkdir new_folder` |
+| `mkdir -p dir1/dir2` | Create nested directories | `mkdir -p projects/work` |
 
 ---
 
-## **3. Differences Between Globbing and Regex**
-| Feature | Globbing | Regular Expressions |
-|---------|---------|------------------|
-| Used for | Matching file names | Matching patterns in text |
-| Wildcards | `*`, `?`, `[]`, `{}` | `^`, `$`, `.` , `+`, `?`, `{}` |
-| Tools | Shell (`ls`, `rm`, `cp`) | `grep`, `sed`, `awk`, `find` |
-| Complexity | Simple | Advanced & powerful |
+## **3. Removing Files and Directories**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `rm filename` | Remove a file | `rm file.txt` |
+| `rm -r dirname` | Remove a directory and its contents | `rm -r folder` |
+| `rm -f filename` | Force remove a file without confirmation | `rm -f file.txt` |
+| `rmdir dirname` | Remove an empty directory | `rmdir empty_folder` |
 
 ---
 
-## **4. Practical Use Cases**
-### **Find and Delete Files with Globbing**
-```sh
-rm *.log            # Delete all log files
-find /var/log -name "*.log" -delete  # Find and delete all log files recursively
-```
-
-### **Find Files Using Regex in `grep`**
-```sh
-grep -E "error|fail" logs.txt  # Find lines containing 'error' or 'fail'
-```
-
-### **Replace Text Using `sed`**
-```sh
-sed -E 's/[0-9]+/NUM/' file.txt  # Replace numbers with 'NUM'
-```
+## **4. Copying Files and Directories**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `cp file1 file2` | Copy a file | `cp file.txt backup.txt` |
+| `cp -r dir1 dir2` | Copy a directory recursively | `cp -r folder1 folder2` |
+| `cp -i file1 file2` | Prompt before overwriting | `cp -i file.txt backup.txt` |
+| `cp -u file1 file2` | Copy only if source is newer | `cp -u file1 file2` |
 
 ---
 
+## **5. Moving and Renaming Files**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `mv file1 file2` | Rename a file | `mv old.txt new.txt` |
+| `mv file1 dir/` | Move a file to a directory | `mv file.txt backup/` |
+| `mv -i file1 file2` | Prompt before overwriting | `mv -i file1 file2` |
 
 ---
 
-This guide serves as a reference for essential Linux commands, categorized for ease of use. 🚀
+## **6. Finding Files and Directories**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `find /path -name filename` | Find files by name | `find /home -name "file.txt"` |
+| `find /path -type d` | Find directories only | `find /home -type d` |
+| `find /path -size +100M` | Find files larger than 100MB | `find /var/log -size +100M` |
+| `locate filename` | Locate a file quickly (requires `updatedb`) | `locate file.txt` |
+| `updatedb` | Update the locate database | `sudo updatedb` |
 
+---
+
+## **7. Viewing File Contents**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `cat filename` | Display file contents | `cat file.txt` |
+| `tac filename` | Display file in reverse | `tac file.txt` |
+| `less filename` | View file content one page at a time | `less file.txt` |
+| `head -n 10 filename` | Show first 10 lines | `head -n 10 file.txt` |
+| `tail -n 10 filename` | Show last 10 lines | `tail -n 10 file.txt` |
+| `tail -f filename` | Continuously watch a file | `tail -f log.txt` |
+
+---
+
+## **8. Editing and Manipulating Files**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `echo "text" > file` | Write text to a file (overwrite) | `echo "Hello" > file.txt` |
+| `echo "text" >> file` | Append text to a file | `echo "World" >> file.txt` |
+| `sed -i 's/old/new/g' filename` | Replace text in a file | `sed -i 's/foo/bar/g' file.txt` |
+| `awk '{print $1}' filename` | Extract the first column from a file | `awk '{print $1}' data.txt` |
+| `cut -d':' -f1 filename` | Extract first field using `:` delimiter | `cut -d':' -f1 /etc/passwd` |
+
+---
+
+## **9. Changing Permissions and Ownership**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `chmod 644 file` | Set read/write for owner, read for others | `chmod 644 file.txt` |
+| `chmod 755 file` | Set executable for owner and read for others | `chmod 755 script.sh` |
+| `chown user:group file` | Change owner and group of a file | `chown user1:group1 file.txt` |
+| `chgrp group file` | Change group ownership | `chgrp users file.txt` |
+
+---
+
+## **10. Creating and Extracting Archives**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `tar -cvf archive.tar files` | Create a tar archive | `tar -cvf backup.tar folder/` |
+| `tar -xvf archive.tar` | Extract a tar archive | `tar -xvf backup.tar` |
+| `tar -czvf archive.tar.gz files` | Create a compressed tar.gz archive | `tar -czvf backup.tar.gz folder/` |
+| `tar -xzvf archive.tar.gz` | Extract a tar.gz archive | `tar -xzvf backup.tar.gz` |
+| `zip -r archive.zip folder/` | Create a zip archive | `zip -r backup.zip folder/` |
+| `unzip archive.zip` | Extract a zip archive | `unzip backup.zip` |
+
+---
+
+## **11. Disk Usage and Space Management**
+| Command | Description | Example |
+|---------|-------------|---------|
+| `df -h` | Show free disk space | `df -h` |
+| `du -sh dir` | Show directory size | `du -sh /home` |
+| `du -ah` | Show size of all files | `du -ah /var/log` |
+| `find / -size +1G` | Find files larger than 1GB | `find / -size +1G` |
+
+---
 
 # **Linux Special Characters and Variables Guide**
 
