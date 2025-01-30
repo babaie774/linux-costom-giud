@@ -487,7 +487,10 @@ This document provides a comprehensive overview of **special characters** in Lin
 - Available system-wide and inherited by child processes.
 - Example:
   ```bash
-  export MY_ENV="Global Variable"
+  env   # Display all environment variables
+  printenv   # Print all environment variables
+  set   # Show all shell variables (including environment variables)
+  export   # Show exported environment variables
   ```
   
 ### **2.3 Shell Variables**
